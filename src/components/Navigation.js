@@ -18,6 +18,7 @@ const styles = {
 
 const Navigation = () => {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+
   return (
     <nav>
       {isLoggedIn && (

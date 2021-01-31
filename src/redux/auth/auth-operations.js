@@ -2,6 +2,19 @@ import * as API from '../../services/api-auth';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
+
+export const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = '';
+  },
+};
+
 const register = createAsyncThunk(
   'auth/register',
   async (credentials, { rejectWithValue }) => {
@@ -36,8 +49,8 @@ const logOut = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await API.logOut();
-      API.token.unset();
+      await axios.post('/users/logout');
+      token.unset();
     } catch (error) {
       return rejectWithValue(error.message);
     }

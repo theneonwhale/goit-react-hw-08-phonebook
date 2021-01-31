@@ -41,35 +41,45 @@ export default function RegisterView() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} style={styles.form} autoComplete="on">
-        <label style={styles.label}>
-          Имя
-          <input type="text" name="name" value={name} onChange={handleChange} />
-        </label>
+    <>
+      <div>
+        <p>If you don't have an account, sign up.</p>
+      </div>
+      <div>
+        <form onSubmit={handleSubmit} style={styles.form} autoComplete="on">
+          <label style={styles.label}>
+            Name
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleChange}
+            />
+          </label>
 
-        <label style={styles.label}>
-          Почта
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
+          <label style={styles.label}>
+            Email
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+            />
+          </label>
 
-        <label style={styles.label}>
-          Пароль
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
+          <label style={styles.label}>
+            Password
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+            />
+          </label>
 
-        <button type="submit">Зарегистрироваться</button>
-      </form>
-    </div>
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
+    </>
   );
 }
