@@ -1,5 +1,6 @@
 import * as API from '../../services/api-contacts';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
@@ -9,7 +10,19 @@ const fetchContacts = createAsyncThunk(
 
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      if (error.response.status === 401) {
+        toast.error('You are not authorized!');
+      }
+
+      if (error.response.status === 404) {
+        toast.error(`User doesn't have such data!`);
+      }
+
+      if (error.response.status === 500) {
+        toast.error('Server is currently unavailable!');
+      }
+
+      return rejectWithValue(error.message);
     }
   },
 );
@@ -22,7 +35,15 @@ const addContact = createAsyncThunk(
 
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      if (error.response.status === 400) {
+        toast.error(`Contact can't be added!`);
+      }
+
+      if (error.response.status === 401) {
+        toast.error(`You are not authorized!`);
+      }
+
+      return rejectWithValue(error.message);
     }
   },
 );
@@ -35,7 +56,19 @@ const deleteContact = createAsyncThunk(
 
       return contactId;
     } catch (error) {
-      return rejectWithValue(error);
+      if (error.response.status === 401) {
+        toast.error('You are not authorized!');
+      }
+
+      if (error.response.status === 404) {
+        toast.error(`User doesn't have such data!`);
+      }
+
+      if (error.response.status === 500) {
+        toast.error('Server is currently unavailable!');
+      }
+
+      return rejectWithValue(error.message);
     }
   },
 );
@@ -48,7 +81,15 @@ const patchContact = createAsyncThunk(
 
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      if (error.response.status === 400) {
+        toast.error(`Contact can't be updated!`);
+      }
+
+      if (error.response.status === 401) {
+        toast.error(`You are not authorized!`);
+      }
+
+      return rejectWithValue(error.message);
     }
   },
 );

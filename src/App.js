@@ -7,10 +7,11 @@ import PublicRoute from './components/PublicRoute';
 import Container from './components/Container/Container';
 import { authOperations, authSelectors } from './redux/auth';
 import Loader from './components/Loader/Loader';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactsView = lazy(() => import('./views/ContactsView'));
 const AddContactView = lazy(() => import('./views/AddContactView'));
-
 const RegisterView = lazy(() => import('./views/RegisterView'));
 const LoginView = lazy(() => import('./views/LoginView'));
 
@@ -60,6 +61,7 @@ export default function App() {
           </Switch>
         </>
       )}
+      <ToastContainer />
     </Container>
   );
 }
